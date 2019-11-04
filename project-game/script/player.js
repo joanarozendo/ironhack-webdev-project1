@@ -2,18 +2,17 @@ class Player {
   constructor(game) {
     this.game = game;
     this.context = game.context;
-    this.playerPosition = {
-      x: 20,
-      y: 350
-    }
+    this.x = 20;
+    this.y = 370;
+    this.image = new Image();
+    this.image.src = "./style/images/character_zombie_run01.png";
+    this.imageHeight = this.image.height;
+    this.imageWidth = this.image.width;
+    this.image.onload;
   }
 
   paint() {
-    const image = new Image();
-    image.src = "./style/images/character_zombie_run0.png";
-    const imageHeight = image.height;
-    const imageWidth = image.width;
-    this.context.drawImage(image, this.playerPosition.x, this.playerPosition.y, imageWidth, imageHeight);
+    this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
   }
 
   clear() {
@@ -21,19 +20,19 @@ class Player {
   }
 
   moveLeft() {
-    if (this.playerPosition.x >= 20) {
-      this.playerPosition.x -= 30;
+    if (this.x >= 20) {
+      this.x -= 30;
     } else {
-      this.playerPosition.x = this.playerPosition.x;
+      this.x = this.x;
     }
   }
   
   moveRight() {
-    if (this.playerPosition.x <= 690) {
-      this.playerPosition.x += 30;
+    if (this.x <= 690) {
+      this.x += 30;
     } else {
     }
-    this.playerPosition.x = this.playerPosition.x;
+    this.x = this.x;
   }
 
   left() {
@@ -41,7 +40,7 @@ class Player {
   }
 
   right() {
-    return this.x + this.width;
+    return this.x + this.imageWidth;
   }
 
   top() {
@@ -49,16 +48,6 @@ class Player {
   }
 
   bottom() {
-    return this.y + this.height;
+    return this.y + this.imageHeight;
   }
-
-  checkCollisions(objectToAvoid) {
-    return !(
-      this.bottom() < objectToAvoid.top() ||
-      this.top() > objectToAvoid.bottom() ||
-      this.right() < objectToAvoid.left() ||
-      this.left() > objectToAvoid.right()
-    );
-  }
-
 }

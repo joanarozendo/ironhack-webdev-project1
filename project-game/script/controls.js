@@ -10,14 +10,10 @@ class Controls {
       };
       switch (event.keyCode) {
         case 37:
-          this.game.player.clear();
           this.game.player.moveLeft();
-          this.game.paintEverything();
           break;
         case 39:
-            this.game.player.clear();
             this.game.player.moveRight();
-            this.game.paintEverything();
           break;
         };
     });

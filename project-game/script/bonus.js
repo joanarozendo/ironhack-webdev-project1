@@ -1,30 +1,43 @@
-/* class Bonus {
+class Bonus {
   constructor(game) {
     this.game = game;
     this.width = 50;
     this.heigth = 20;
     this.context = game.context;
-    this.bonusPosition = {
-      x: 0,
-      y: 0
-    }
+    this.x = 0;
+    this.y = 0;
+    this.image = new Image();
+    this.image.src = "./style/images/coffee1.png";
+    this.imageHeight = this.image.height * 0.05;
+    this.imageWidth = this.image.width * 0.05;
   }
 
-  randomBonusPosition() {
-    this.bonusPosition.x = Math.floor(Math.random() * 15) * 50;
-    this.bonusPosition.y = 0;
+  randomBonus() {
+    this.x = Math.floor(Math.random() * 15) * 50;
+    this.y = 0;
   }
 
   paint() {
-    const image = new Image();
-    image.src = "./style/images/coffee.png";
-    const imageHeight = image.height;
-    const imageWidth = image.width;
-    const size = 0.08;
-    this.context.drawImage(image, this.bonusPosition.x, this.bonusPosition.y, imageWidth * size, imageHeight * size);
+    this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
   }
 
   movingBonus() {
-    this.bonusPosition.y += 3;
+    this.y += 3;
   }
-} */
+  
+  left() {
+    return this.x;
+  }
+
+  right() {
+    return this.x + this.imageWidth;
+  }
+
+  top() {
+    return this.y;
+  }
+
+  bottom() {
+    return this.y + this.imageHeight;
+  }
+}

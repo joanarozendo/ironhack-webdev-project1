@@ -1,30 +1,43 @@
-/* class ObjectToCatch {
+class ObjectToCatch {
   constructor(game) {
     this.game = game;
     this.width = 50;
     this.heigth = 20;
     this.context = game.context;
-    this.objectToCatchPosition = {
-      x: 0,
-      y: 0
-    }
+    this.x = 0;
+    this.y = 0;
+    this.image = new Image();
+    this.image.src = "./style/images/brain11.png";
+    this.imageHeight = this.image.height * 0.07;
+    this.imageWidth = this.image.width * 0.07;
   }
 
   randomObjectToCatchPosition() {
-    this.objectToCatchPosition.x = Math.floor(Math.random() * 15) * 50;
-    this.objectToCatchPosition.y = 0;
+    this.x = Math.floor(Math.random() * 15) * 50;
+    this.y = 0;
   }
 
   paint() {
-    const image = new Image();
-    image.src = "./style/images/brain1.png";
-    const imageHeight = image.height;
-    const imageWidth = image.width;
-    const size = 0.08;
-    this.context.drawImage(image, this.objectToCatchPosition.x, this.objectToCatchPosition.y, imageWidth * size, imageHeight * size);
+    this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
   }
 
   movingObjectToCatch() {
-    this.objectToCatchPosition.y += 3;
+    this.y += 3;
   }
-} */
+  
+  left() {
+    return this.x;
+  }
+
+  right() {
+    return this.x + this.imageWidth;
+  }
+
+  top() {
+    return this.y;
+  }
+
+  bottom() {
+    return this.y + this.imageHeight;
+  }
+}

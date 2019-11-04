@@ -4,27 +4,40 @@ class ObjectToAvoid {
     this.width = 50;
     this.heigth = 20;
     this.context = game.context;
-    this.objectToAvoidPosition = {
-      x: 0,
-      y: 0
-    }
+    this.x = 0;
+    this.y = 0;
+    this.image = new Image();
+    this.image.src = "./style/images/stake1.png";
+    this.imageHeight = this.image.height * 0.2;
+    this.imageWidth = this.image.width * 0.2;
   }
 
   randomObjectToAvoidPosition() {
-    this.objectToAvoidPosition.x = Math.floor(Math.random() * 15) * 50;
-    this.objectToAvoidPosition.y = 0;
+    this.x = Math.floor(Math.random() * 15) * 50;
+    this.y = 0;
   }
 
   paint() {
-    const image = new Image();
-    image.src = "./style/images/stake.png";
-    const imageHeight = image.height;
-    const imageWidth = image.width;
-    const size = 0.2;
-    this.context.drawImage(image, this.objectToAvoidPosition.x, this.objectToAvoidPosition.y, imageWidth * size, imageHeight * size);
+    this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
   }
 
   movingObjectToAvoid() {
-    this.objectToAvoidPosition.y += 3;
+    this.y += 3;
+  }
+  
+  left() {
+    return this.x;
+  }
+
+  right() {
+    return this.x + this.imageWidth;
+  }
+
+  top() {
+    return this.y;
+  }
+
+  bottom() {
+    return this.y + this.imageHeight;
   }
 }
