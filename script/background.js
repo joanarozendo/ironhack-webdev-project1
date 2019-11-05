@@ -9,6 +9,7 @@ class Background {
   paint() {
     const image = new Image();
     image.src = "./style/images/background.png";
+    // image.src = "./style/images/background.png";
     this.context.drawImage(image, 0, 0, this.width, this.height);
   }
 }

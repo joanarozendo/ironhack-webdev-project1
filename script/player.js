@@ -4,15 +4,16 @@ class Player {
     this.context = game.context;
     this.x = 20;
     this.y = 370;
+    this.velocityX = 20;
     this.image = new Image();
     this.image.src = "./style/images/character_zombie_run01.png";
-    // this.imageHeight = this.image.height;
-    // this.imageWidth = this.image.width;
+    this.imageHeight = this.image.height;
+    this.imageWidth = this.image.width;
     this.image.onload;
   }
 
   paint() {
-    this.context.drawImage(this.image, this.x, this.y, this.image.width, this.image.height);
+    this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
   }
 
   clear() {
@@ -20,27 +21,44 @@ class Player {
   }
 
   moveLeft() {
-    if (this.x >= 20) {
-      this.x -= 10;
+    if ((this.x - this.velocityX) >= 10) {
+      this.x -= this.velocityX;
     } else {
       this.x = this.x;
     }
   }
   
   moveRight() {
+    if ((this.x + this.velocityX) <= 710) {
+      this.x += this.velocityX;
+    } else {
+      this.x = this.x;
+    }
+  }
+
+/* 
+  moveLeftFaster() {
+    if (this.x >= 20) {
+      this.x -= 20;
+    } else {
+      this.x = this.x;
+    }
+  }
+  
+  moveRightFaster() {
     if (this.x <= 690) {
-      this.x += 10;
+      this.x += 20;
     } else {
     }
       this.x = this.x;
-  }
+  } */
 
   left() {
     return this.x;
   }
 
   right() {
-    return this.x + this.image.width;
+    return this.x + this.imageWidth;
   }
 
   top() {
@@ -48,6 +66,6 @@ class Player {
   }
 
   bottom() {
-    return this.y + this.image.height;
+    return this.y + this.imageHeight;
   }
 }

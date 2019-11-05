@@ -6,6 +6,7 @@ class ObjectToAvoid {
     this.context = game.context;
     this.x = 0;
     this.y = 0;
+    this.velocityY = 3;
     this.image = new Image();
     this.image.src = "./style/images/stake1.png";
     this.imageHeight = this.image.height * 0.2;
@@ -22,7 +23,7 @@ class ObjectToAvoid {
   }
 
   movingObjectToAvoid() {
-    this.y += 3;
+    this.y += this.velocityY;
   }
   
   left() {

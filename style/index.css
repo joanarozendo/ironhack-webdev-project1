@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700&display=swap');
+@font-face { font-family: monogram; src: url("./monogram_extended.ttf")}
 
 body, h1 {
   box-sizing: border-box;
-  font-family: 'Ubuntu Mono', monospace;
-  color: #383434;
+  /* font-family: 'Ubuntu Mono', monospace; */
+  font-family: monogram;
+  font-size: 24px;
+  /* color: #383434; */
   background-color: darkslategray;
 }
 

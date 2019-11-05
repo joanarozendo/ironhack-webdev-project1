@@ -8,8 +8,8 @@ class HeartBonus {
     this.y = 0;
     this.image = new Image();
     this.image.src = "./style/images/heart.png";
-    this.imageHeight = this.image.height;
-    this.imageWidth = this.image.width;
+    this.imageHeight = this.image.height * 1.5;
+    this.imageWidth = this.image.width * 1.5;
   }
 
   randomHeartBonus() {

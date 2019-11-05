@@ -6,6 +6,7 @@ class ObjectToCatch {
     this.context = game.context;
     this.x = 0;
     this.y = 0;
+    this.velocityY = 3;
     this.image = new Image();
     this.image.src = "./style/images/brain11.png";
     this.imageHeight = this.image.height * 0.07;
@@ -22,7 +23,7 @@ class ObjectToCatch {
   }
 
   movingObjectToCatch() {
-    this.y += 3;
+    this.y += this.velocityY;
   }
   
   left() {
