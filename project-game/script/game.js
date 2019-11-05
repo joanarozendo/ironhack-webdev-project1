@@ -10,12 +10,17 @@ class Game {
     this.background = new Background(this);
     this.objectToAvoid = new ObjectToAvoid(this);
     this.objectToCatch = new ObjectToCatch(this);
-    this.bonus = new Bonus(this);
+    this.coffeeBonus = new CoffeeBonus(this);
+    this.heartBonus = new HeartBonus(this);
     this.objectToAvoidArray = [];
     this.objectToCatchArray = [];
-    this.bonusArray = [];
+    this.coffeeBonusArray = [];
+    this.heartBonusArray = [];
     this.objectTimer = 0;
-    this.speed = 1500;
+    this.objectToAvoidSpeed = 1500;
+    this.objectToCatchSpeed = 2000;
+    this.coffeeBonusSpeed = 3000;
+    this.heartBonusSpeed = 3500;
     this.life = 3;
     this.score = 0;
   }
@@ -28,11 +33,23 @@ class Game {
     this.animation();
   }
 
+  animation(timestamp) {
+    if (this.life > 0 && this.score < 3) {
+      this.paintEverything(timestamp);
+      window.requestAnimationFrame(timestamp => this.animation(timestamp));
+      } else if (this.life > 0 && this.score >= 3) {
+         this.gameWon();
+      } else {
+          this.gameOver();
+        }
+      }
+        
   paintEverything(timestamp) {
     this.clear();
     this.background.paint();
     this.player.paint();
-    this.createObject(timestamp);
+
+    this.createObjectToAvoid(timestamp);
     for (let i = 0; i < this.objectToAvoidArray.length; i++) {
       const randomObjectToAvoid = this.objectToAvoidArray[i];
       randomObjectToAvoid.paint();
@@ -45,6 +62,7 @@ class Game {
     }
     this.lifeCount();
     
+    this.createObjectToCatch(timestamp);
     for (let i = 0; i < this.objectToCatchArray.length; i++) {
       const randomObjectToCatch = this.objectToCatchArray[i];
       randomObjectToCatch.paint();
@@ -56,45 +74,76 @@ class Game {
       }
     }
     this.scoreboard();
+    
+    this.createCoffeeBonus(timestamp);
+    for (let i = 0; i < this.coffeeBonusArray.length; i++) {
+      const randomCoffeeBonus = this.coffeeBonusArray[i];
+      randomCoffeeBonus.paint();
+      randomCoffeeBonus.movingCoffeeBonus();
+      if (this.checkCollisions(randomCoffeeBonus)) {
+        this.coffeeBonusArray.splice(i, 1);
+        this.life += 1;
+        console.log('You got an extra life!');
+      }
+    }
 
-    for (let i = 0; i < this.bonusArray.length; i++) {
-      const randomBonus = this.bonusArray[i];
-      randomBonus.paint();
-      randomBonus.movingBonus();
-      if (this.checkCollisions(randomBonus)) {
-        this.bonusArray.splice(i, 1);
-        console.log('You got a bonus!');
+    this.createHeartBonus(timestamp);
+    for (let i = 0; i < this.heartBonusArray.length; i++) {
+      const randomHeartBonus = this.heartBonusArray[i];
+      randomHeartBonus.paint();
+      randomHeartBonus.movingHeartBonus();
+      if (this.checkCollisions(randomHeartBonus)) {
+        this.heartBonusArray.splice(i, 1);
+        console.log('You got faster!');
       }
     }
   }
-
-  animation(timestamp) {
-    if (this.life > 0) {
-      this.paintEverything(timestamp);
-      window.requestAnimationFrame(timestamp => this.animation(timestamp));
-    } else {
-      this.gameOver();
-    }
-  }
   
-  createObject(timestamp) {
-    if (this.objectTimer < timestamp - this.speed) {
+  createObjectToAvoid(timestamp) {
+    if (this.objectTimer < timestamp - this.objectToAvoidSpeed) {
 
       const objectToAvoid = new ObjectToAvoid(this);
       objectToAvoid.randomObjectToAvoidPosition();      
       this.objectToAvoidArray.push(objectToAvoid);
 
+      this.objectTimer = timestamp;
+    }
+  } 
+
+  createObjectToCatch(timestamp) {
+    if (this.objectTimer < timestamp - this.objectToCatchSpeed) {
+
       const objectToCatch = new ObjectToCatch(this);
       objectToCatch.randomObjectToCatchPosition();      
       this.objectToCatchArray.push(objectToCatch);
 
-      const bonus = new Bonus(this);
-      bonus.randomBonus();      
-      this.bonusArray.push(bonus);
+      this.objectTimer = timestamp;
+    }
+  } 
+
+  createCoffeeBonus(timestamp) {
+    if (this.objectTimer < timestamp - this.coffeeBonusSpeed) {
+
+      const coffeeBonus = new CoffeeBonus(this);
+      coffeeBonus.randomCoffeeBonus();      
+      this.coffeeBonusArray.push(coffeeBonus);
 
       this.objectTimer = timestamp;
     }
   } 
+
+  createHeartBonus(timestamp) {
+    if (this.objectTimer < timestamp - this.heartBonusSpeed) {
+
+      const heartBonus = new HeartBonus(this);
+      heartBonus.randomHeartBonus();      
+      this.heartBonusArray.push(heartBonus);
+
+      this.objectTimer = timestamp;
+    }
+  } 
+
+  // createFallingObjects() {}
 
   checkCollisions(object) {
     if (
@@ -114,6 +163,15 @@ class Game {
     this.context.fillStyle = 'white';
     this.context.font = '80px monospace';
     this.context.fillText('GAME OVER', 200, this.height/2);
+  }
+
+  gameWon() {
+    this.clear();
+    this.context.fillStyle = 'black';
+    this.context.fillRect(0, 0, this.width, this.height);
+    this.context.fillStyle = 'white';
+    this.context.font = '80px monospace';
+    this.context.fillText('YOU WON!', 220, this.height/2);
   }
 
   scoreboard() {

@@ -1,4 +1,4 @@
-class Bonus {
+class CoffeeBonus {
   constructor(game) {
     this.game = game;
     this.width = 50;
@@ -12,7 +12,7 @@ class Bonus {
     this.imageWidth = this.image.width * 0.05;
   }
 
-  randomBonus() {
+  randomCoffeeBonus() {
     this.x = Math.floor(Math.random() * 15) * 50;
     this.y = 0;
   }
@@ -21,7 +21,7 @@ class Bonus {
     this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
   }
 
-  movingBonus() {
+  movingCoffeeBonus() {
     this.y += 3;
   }
   

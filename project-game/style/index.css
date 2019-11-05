@@ -4,7 +4,7 @@ body, h1 {
   box-sizing: border-box;
   font-family: 'Ubuntu Mono', monospace;
   color: #383434;
-  background-color: DARKSEAGREEN;
+  background-color: darkslategray;
 }
 
 nav .ironhack-logo {
@@ -27,21 +27,20 @@ h3 {
 
 canvas {
   margin-top: 30px;
-  margin-left: 200px;
+  /* margin-left: 200px; */
   border: 1px solid #383434;
 }
-
+/* 
 .button {
   margin-left: 250px;
   margin-top: 30px;
-}
+} */
 
 #instructions {
   text-align: center;
 }
 
 footer {
-  margin-top: 20px;
   margin-right: 20px;
   text-align: right;
 }
