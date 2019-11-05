@@ -16,11 +16,14 @@ class Game {
     this.objectToCatchArray = [];
     this.coffeeBonusArray = [];
     this.heartBonusArray = [];
-    this.objectTimer = 0;
+    this.objectToAvoidTimer = 0;
+    this.objectToCatchTimer = 0;
+    this.coffeeBonusTimer = 0;
+    this.heartBonusTimer = 0;
     this.objectToAvoidSpeed = 1500;
-    this.objectToCatchSpeed = 2000;
-    this.coffeeBonusSpeed = 3000;
-    this.heartBonusSpeed = 3500;
+    this.objectToCatchSpeed = 1200;
+    this.coffeeBonusSpeed = 6000;
+    this.heartBonusSpeed = 4000;
     this.life = 3;
     this.score = 0;
   }
@@ -34,10 +37,10 @@ class Game {
   }
 
   animation(timestamp) {
-    if (this.life > 0 && this.score < 3) {
+    if (this.life > 0 && this.score < 10) {
       this.paintEverything(timestamp);
       window.requestAnimationFrame(timestamp => this.animation(timestamp));
-      } else if (this.life > 0 && this.score >= 3) {
+      } else if (this.life > 0 && this.score >= 10) {
          this.gameWon();
       } else {
           this.gameOver();
@@ -98,52 +101,97 @@ class Game {
       }
     }
   }
-  
+
   createObjectToAvoid(timestamp) {
-    if (this.objectTimer < timestamp - this.objectToAvoidSpeed) {
+    if (this.objectToAvoidTimer < timestamp - this.objectToAvoidSpeed) {
 
       const objectToAvoid = new ObjectToAvoid(this);
       objectToAvoid.randomObjectToAvoidPosition();      
       this.objectToAvoidArray.push(objectToAvoid);
 
-      this.objectTimer = timestamp;
+      this.objectToAvoidTimer = timestamp;
     }
   } 
 
   createObjectToCatch(timestamp) {
-    if (this.objectTimer < timestamp - this.objectToCatchSpeed) {
+    if (this.objectToCatchTimer < timestamp - this.objectToCatchSpeed) {
 
       const objectToCatch = new ObjectToCatch(this);
       objectToCatch.randomObjectToCatchPosition();      
       this.objectToCatchArray.push(objectToCatch);
 
-      this.objectTimer = timestamp;
+      this.objectToCatchTimer = timestamp;
     }
   } 
 
   createCoffeeBonus(timestamp) {
-    if (this.objectTimer < timestamp - this.coffeeBonusSpeed) {
+    if (this.coffeeBonusTimer < timestamp - this.coffeeBonusSpeed) {
 
       const coffeeBonus = new CoffeeBonus(this);
       coffeeBonus.randomCoffeeBonus();      
       this.coffeeBonusArray.push(coffeeBonus);
 
-      this.objectTimer = timestamp;
+      this.coffeeBonusTimer = timestamp;
     }
   } 
 
   createHeartBonus(timestamp) {
-    if (this.objectTimer < timestamp - this.heartBonusSpeed) {
+    if (this.heartBonusTimer < timestamp - this.heartBonusSpeed) {
 
       const heartBonus = new HeartBonus(this);
       heartBonus.randomHeartBonus();      
       this.heartBonusArray.push(heartBonus);
 
-      this.objectTimer = timestamp;
+      this.heartBonusTimer = timestamp;
     }
   } 
 
-  // createFallingObjects() {}
+  /* createFallingObjects() {
+
+    createObjectToAvoid(timestamp) {
+      if (this.objectTimer < timestamp - this.objectToAvoidSpeed) {
+  
+        const objectToAvoid = new ObjectToAvoid(this);
+        objectToAvoid.randomObjectToAvoidPosition();      
+        this.objectToAvoidArray.push(objectToAvoid);
+  
+        this.objectTimer = timestamp;
+      }
+    
+  
+    createObjectToCatch(timestamp) {
+      if (this.objectTimer < timestamp - this.objectToCatchSpeed) {
+  
+        const objectToCatch = new ObjectToCatch(this);
+        objectToCatch.randomObjectToCatchPosition();      
+        this.objectToCatchArray.push(objectToCatch);
+  
+        this.objectTimer = timestamp;
+      }
+    } 
+  
+    createCoffeeBonus(timestamp) {
+      if (this.objectTimer < timestamp - this.coffeeBonusSpeed) {
+  
+        const coffeeBonus = new CoffeeBonus(this);
+        coffeeBonus.randomCoffeeBonus();      
+        this.coffeeBonusArray.push(coffeeBonus);
+  
+        this.objectTimer = timestamp;
+      }
+    } 
+  
+    createHeartBonus(timestamp) {
+      if (this.objectTimer < timestamp - this.heartBonusSpeed) {
+  
+        const heartBonus = new HeartBonus(this);
+        heartBonus.randomHeartBonus();      
+        this.heartBonusArray.push(heartBonus);
+  
+        this.objectTimer = timestamp;
+      }
+    } 
+  } */
 
   checkCollisions(object) {
     if (
