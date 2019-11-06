@@ -8,9 +8,9 @@ class ObjectToAvoid {
     this.y = 0;
     this.velocityY = 3;
     this.image = new Image();
-    this.image.src = "./style/images/stake1.png";
-    this.imageHeight = this.image.height * 0.2;
-    this.imageWidth = this.image.width * 0.2;
+    this.image.src = "./style/images/net.png";
+    this.imageHeight = this.image.height * 0.1;
+    this.imageWidth = this.image.width * 0.1;
   }
 
   randomObjectToAvoidPosition() {

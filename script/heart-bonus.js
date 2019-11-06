@@ -6,10 +6,10 @@ class HeartBonus {
     this.context = game.context;
     this.x = 0;
     this.y = 0;
-    this.image = new Image();
-    this.image.src = "./style/images/heart.png";
-    this.imageHeight = this.image.height * 1.5;
-    this.imageWidth = this.image.width * 1.5;
+    this.heartImage = new Image();
+    this.heartImage.src = "./style/images/heart.png";
+    this.heartImageHeight = this.heartImage.height * 0.07;
+    this.heartImageWidth = this.heartImage.width * 0.07;
   }
 
   randomHeartBonus() {
@@ -18,7 +18,7 @@ class HeartBonus {
   }
 
   paint() {
-    this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
+    this.context.drawImage(this.heartImage, this.x, this.y, this.heartImageWidth, this.heartImageHeight);
   }
 
   movingHeartBonus() {
@@ -30,7 +30,7 @@ class HeartBonus {
   }
 
   right() {
-    return this.x + this.imageWidth;
+    return this.x + this.heartImageWidth;
   }
 
   top() {
@@ -38,6 +38,6 @@ class HeartBonus {
   }
 
   bottom() {
-    return this.y + this.imageHeight;
+    return this.y + this.heartImageHeight;
   }
 }

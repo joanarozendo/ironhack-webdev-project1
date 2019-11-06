@@ -8,9 +8,9 @@ class ObjectToCatch {
     this.y = 0;
     this.velocityY = 3;
     this.image = new Image();
-    this.image.src = "./style/images/brain11.png";
-    this.imageHeight = this.image.height * 0.07;
-    this.imageWidth = this.image.width * 0.07;
+    this.image.src = "./style/images/javascript.png";
+    this.imageHeight = this.image.height * 0.8;
+    this.imageWidth = this.image.width * 0.8;
   }
 
   randomObjectToCatchPosition() {

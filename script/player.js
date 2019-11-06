@@ -3,17 +3,26 @@ class Player {
     this.game = game;
     this.context = game.context;
     this.x = 20;
-    this.y = 370;
+    this.y = 305;
     this.velocityX = 20;
     this.image = new Image();
-    this.image.src = "./style/images/character_zombie_run01.png";
-    this.imageHeight = this.image.height;
-    this.imageWidth = this.image.width;
-    this.image.onload;
+    // this.image.src = "./style/images/girl1.png";
+    this.image.src = "./style/images/girl1.png";
+    this.imageHeight = this.image.height * 1.1;
+    this.imageWidth = this.image.width * 1.1;
+
+    this.lowLifeImage = new Image();
+    this.lowLifeImage.src = "./style/images/girl2.png";
+    this.lowLifeImageWidth = this.lowLifeImage.width * 1.1;
+    this.lowLifeImageHeight = this.lowLifeImage.height * 1.1;
   }
 
   paint() {
-    this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
+    if (this.game.life === 1) {
+      this.context.drawImage(this.lowLifeImage, this.x, this.y, this.lowLifeImageWidth, this.lowLifeImageHeight)
+    } else {
+      this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
+    }
   }
 
   clear() {
@@ -35,23 +44,6 @@ class Player {
       this.x = this.x;
     }
   }
-
-/* 
-  moveLeftFaster() {
-    if (this.x >= 20) {
-      this.x -= 20;
-    } else {
-      this.x = this.x;
-    }
-  }
-  
-  moveRightFaster() {
-    if (this.x <= 690) {
-      this.x += 20;
-    } else {
-    }
-      this.x = this.x;
-  } */
 
   left() {
     return this.x;
