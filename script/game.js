@@ -19,7 +19,7 @@ class Game {
     this.heartBonusTimer = 0;
     this.beerBonusTimer = 0;
     this.objectToAvoidSpeed = 1400;
-    this.objectToCatchSpeed = 1200;
+    this.objectToCatchSpeed = 1000;
     this.coffeeBonusSpeed = 8000;
     this.heartBonusSpeed = 10000;
     this.beerBonusSpeed = 13000;
@@ -28,8 +28,19 @@ class Game {
     this.level = 1;
     this.heartImage = new Image();
     this.heartImage.src = "./style/images/heart.png";
-    this.heartImageHeight = this.heartImage.height * 0.05;
-    this.heartImageWidth = this.heartImage.width * 0.05;
+    // this.heartImageHeight = this.heartImage.height * 0.05;
+    // this.heartImageWidth = this.heartImage.width * 0.05;
+  }
+
+  startScreen() {
+    this.context.fillStyle = 'black'
+    this.context.fillRect(0, 0, $canvas.width, $canvas.height)
+    this.context.fillStyle = 'white';
+    this.context.font = '60px monogram';
+    this.context.fillText('START GAME', 240, 250);
+    this.context.font = '25px monogram';
+    this.context.fillText(`Press 'Enter' to start`, 275, 300);
+    
   }
 
   paintEverything(timestamp) {
@@ -50,9 +61,11 @@ class Game {
     if (this.life > 0 && this.score % 10 === 0 && this.score !== 0) {
       this.levelUp();
       this.paintEverything(timestamp);
-    } else if (this.life > 0) {
+    } else if (this.life > 0 && this.level < 7) {
       this.paintEverything(timestamp);
-    } else {
+    } else if (this.level === 7) {
+      this.gameWon();
+    } else if (this.life === 0) {
       this.gameOver();
     }
     window.requestAnimationFrame(timestamp => this.animation(timestamp));
@@ -185,25 +198,25 @@ class Game {
     this.context.fillText(`LIVES: ${this.life}`, 710, 50);
   
     if (this.life === 5) {
-      this.context.drawImage(this.heartImage, 665, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 690, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 715, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 740, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 765, 10, this.heartImageWidth, this.heartImageHeight);
+      this.context.drawImage(this.heartImage, 665, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 690, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 715, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 740, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 765, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
     } else if (this.life === 4) {
-      this.context.drawImage(this.heartImage, 690, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 715, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 740, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 765, 10, this.heartImageWidth, this.heartImageHeight);
+      this.context.drawImage(this.heartImage, 690, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 715, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 740, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 765, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
     } else if (this.life === 3) {
-      this.context.drawImage(this.heartImage, 715, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 740, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 765, 10, this.heartImageWidth, this.heartImageHeight);
+      this.context.drawImage(this.heartImage, 715, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 740, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 765, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
     } else if (this.life === 2) {
-      this.context.drawImage(this.heartImage, 740, 10, this.heartImageWidth, this.heartImageHeight);
-      this.context.drawImage(this.heartImage, 765, 10, this.heartImageWidth, this.heartImageHeight);
+      this.context.drawImage(this.heartImage, 740, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
+      this.context.drawImage(this.heartImage, 765, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
     } else if (this.life === 1) {
-      this.context.drawImage(this.heartImage, 765, 10, this.heartImageWidth, this.heartImageHeight);
+      this.context.drawImage(this.heartImage, 765, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
     } 
   }
 
@@ -226,6 +239,18 @@ class Game {
     this.context.fillStyle = "white";
     this.context.font = "80px monogram";
     this.context.fillText("GAME OVER", 200, 250);
+    this.context.font = "40px monogram";
+    this.context.fillText(`Your score: ${this.score}`, 200, 300);
+  }
+
+  gameWon() {
+    this.clear();
+    const gameWonImage = new Image();
+    gameWonImage.src = "./style/images/dayover.jpg";
+    this.context.drawImage(gameWonImage, 0, 0, this.width, this.height);
+    this.context.fillStyle = "white";
+    this.context.font = "80px monogram";
+    this.context.fillText("YOU WON!", 200, 250);
     this.context.font = "40px monogram";
     this.context.fillText(`Your score: ${this.score}`, 200, 300);
   }

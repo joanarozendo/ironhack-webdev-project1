@@ -8,8 +8,8 @@ class Player {
 
     this.image = new Image();
     this.image.src = "./style/images/girl1.png";
-    this.imageHeight = this.image.height * 1.1;
-    this.imageWidth = this.image.width * 1.1;
+    // this.imageWidth = this.image.width * 1.1;
+    // this.imageHeight = this.image.height * 1.1;
 
     this.worriedImage = new Image();
     this.worriedImage.src = "./style/images/girl2.png";
@@ -34,7 +34,7 @@ class Player {
 
   paint() {
       if (this.game.life === 5) {
-        this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
+        this.context.drawImage(this.image, this.x, this.y, this.image.width * 1.1, this.image.height * 1.1);
       } else if (this.game.life === 4) {
         this.context.drawImage(this.worriedImage, this.x, this.y, this.worriedImageImageWidth, this.worriedImageHeight);
       } else if (this.game.life === 3) {
@@ -71,7 +71,7 @@ class Player {
   }
 
   right() {
-    return this.x + this.imageWidth;
+    return this.x + this.image.width;
   }
 
   top() {
@@ -79,6 +79,6 @@ class Player {
   }
 
   bottom() {
-    return this.y + this.imageHeight;
+    return this.y + this.image.height;
   }
 }

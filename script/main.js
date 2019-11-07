@@ -5,15 +5,20 @@ const $score = document.querySelector('h1');
 $score.innerHTML = "CLASSROOM MADNESS"
 console.dir($score);
 */
-const context = $canvas.getContext('2d');
+/* const context = $canvas.getContext('2d');
 context.fillStyle = 'black'
 context.fillRect(0, 0, $canvas.width, $canvas.height)
 context.fillStyle = 'white';
 context.font = '60px monogram';
 context.fillText('START GAME', 240, 250);
 context.font = '25px monogram';
-context.fillText(`Press 'Enter' to start`, 275, 300);
+context.fillText(`Press 'Enter' to start`, 275, 300); */
 
+
+window.addEventListener('load', () => {
+  const game = new Game ($canvas);
+  game.startScreen();
+  });
 
 document.addEventListener('keydown', () => {
   if (event.keyCode === 13) {

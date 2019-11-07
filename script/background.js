@@ -12,13 +12,13 @@ class Background {
     this.levelThreeImage = new Image();
     this.levelThreeImage.src = "./style/images/background3.jpg";
     this.levelFourImage = new Image();
-    this.levelFourImage.src = "./style/images/background4.jpg";
+    this.levelFourImage.src = "./style/images/background4.png";
     this.levelFiveImage = new Image();
     this.levelFiveImage.src = "./style/images/background5.jpg";
     this.levelSixImage = new Image();
     this.levelSixImage.src = "./style/images/background6.jpg";
-    this.levelCrazyImage = new Image();
-    this.levelCrazyImage.src = "./style/images/background7.jpg";
+    // this.levelCrazyImage = new Image();
+    // this.levelCrazyImage.src = "./style/images/background7.jpg";
 
     }
 
@@ -40,9 +40,7 @@ class Background {
     } else if (this.game.level === 6) {
       this.paintLevelSix();
       
-    } else if (this.game.level >= 7) {
-      this.paintCrazyLevels();
-    }
+    } 
   }
   
   paintLevelOne() {
@@ -69,9 +67,5 @@ class Background {
     this.context.drawImage(this.levelSixImage, 0, 0, this.width, this.height);
   }
   
-  paintCrazyLevels() {
-    this.context.drawImage(this.levelCrazyImage, 0, 0, this.width, this.height);
-  }
-
 }
 
