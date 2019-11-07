@@ -6,10 +6,11 @@ class CoffeeBonus {
     this.context = game.context;
     this.x = 0;
     this.y = 0;
+    this.velocityY = 3;
     this.image = new Image();
-    this.image.src = "./style/images/coffee1.png";
-    this.imageHeight = this.image.height * 0.05;
-    this.imageWidth = this.image.width * 0.05;
+    this.image.src = "./style/images/coffee.png";
+    this.imageHeight = this.image.height * 0.12;
+    this.imageWidth = this.image.width * 0.12;
   }
 
   randomCoffeeBonus() {
@@ -22,7 +23,7 @@ class CoffeeBonus {
   }
 
   movingCoffeeBonus() {
-    this.y += 3;
+    this.y += this.velocityY;
   }
   
   left() {

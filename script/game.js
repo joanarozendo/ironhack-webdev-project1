@@ -12,14 +12,17 @@ class Game {
     this.objectToCatchArray = [];
     this.coffeeBonusArray = [];
     this.heartBonusArray = [];
+    this.beerBonusArray = [];
     this.objectToAvoidTimer = 0;
     this.objectToCatchTimer = 0;
     this.coffeeBonusTimer = 0;
     this.heartBonusTimer = 0;
+    this.beerBonusTimer = 0;
     this.objectToAvoidSpeed = 1400;
     this.objectToCatchSpeed = 1200;
     this.coffeeBonusSpeed = 8000;
     this.heartBonusSpeed = 10000;
+    this.beerBonusSpeed = 13000;
     this.life = 5;
     this.score = 0;
     this.level = 1;
@@ -27,9 +30,6 @@ class Game {
     this.heartImage.src = "./style/images/heart.png";
     this.heartImageHeight = this.heartImage.height * 0.05;
     this.heartImageWidth = this.heartImage.width * 0.05;
-    this.speedy = false;
-    this.speedyCount = 0;
-    this.lifeCountStartingPoint = 765;
   }
 
   paintEverything(timestamp) {
@@ -99,6 +99,12 @@ class Game {
       this.heartBonusArray.push(heartBonus);
       this.heartBonusTimer = timestamp;
     }
+    if (this.beerBonusTimer < timestamp - this.beerBonusSpeed) {
+      const beerBonus = new BeerBonus(this);
+      beerBonus.randomBeerBonus();
+      this.beerBonusArray.push(beerBonus);
+      this.beerBonusTimer = timestamp;
+    }
   }
 
   paintFallingObjects(timestamp) {
@@ -129,7 +135,7 @@ class Game {
       randomCoffeeBonus.movingCoffeeBonus();
       if (this.checkCollisions(randomCoffeeBonus)) {
         this.coffeeBonusArray.splice(i, 1);
-        let fasterPlayer = setInterval(() => (this.player.velocityX += 3), 400);
+        let fasterPlayer = setInterval(() => (this.player.velocityX += 2), 400);
         setTimeout(() => {
           clearInterval(fasterPlayer);
           this.player.velocityX = 20;
@@ -146,6 +152,17 @@ class Game {
         if (this.life < 5) {
           this.life += 1;
         }
+        //console.log('You got an extra life!');
+      }
+    }
+
+    for (let i = 0; i < this.beerBonusArray.length; i++) {
+      const randomBeerBonus = this.beerBonusArray[i];
+      randomBeerBonus.paint();
+      randomBeerBonus.movingBeerBonus();
+      if (this.checkCollisions(randomBeerBonus)) {
+        this.beerBonusArray.splice(i, 1);
+        this.life = 5;
         //console.log('You got an extra life!');
       }
     }

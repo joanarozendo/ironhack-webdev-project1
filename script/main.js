@@ -33,4 +33,4 @@ document.addEventListener('keydown', () => {
 
 
 
-
+/* if true start game, if false start screen */

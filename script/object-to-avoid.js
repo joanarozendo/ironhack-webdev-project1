@@ -7,10 +7,22 @@ class ObjectToAvoid {
     this.x = 0;
     this.y = 0;
     this.velocityY = 3;
-    this.image = new Image();
-    this.image.src = "./style/images/net.png";
-    this.imageHeight = this.image.height * 0.1;
-    this.imageWidth = this.image.width * 0.1;
+    this.instaImage = new Image();
+    this.instaImage.src = "./style/images/instagram.png";
+    this.facebookImage = new Image();
+    this.facebookImage.src = "./style/images/facebook.png";
+    this.phoneImage = new Image();
+    this.phoneImage.src = "./style/images/netflix.png";
+    this.tvImage = new Image();
+    this.tvImage.src = "./style/images/television.png";
+    this.joystickImage = new Image();
+    this.joystickImage.src = "./style/images/joystick.png";
+    this.snoozeImage = new Image();
+    this.snoozeImage.src = "./style/images/snooze.png";
+    this.objectToAvoidArr = [this.instaImage, this.facebookImage, this.phoneImage, this.tvImage, this.joystickImage, this.snoozeImage];
+    this.randomObjectToAvoidImage = this.objectToAvoidArr[Math.floor(Math.random() * this.objectToAvoidArr.length)];
+    this.imageWidth = 50;
+    this.imageHeight = 50;
   }
 
   randomObjectToAvoidPosition() {
@@ -19,7 +31,7 @@ class ObjectToAvoid {
   }
 
   paint() {
-    this.context.drawImage(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
+    this.context.drawImage(this.randomObjectToAvoidImage, this.x, this.y, this.imageWidth, this.imageHeight);
   }
 
   movingObjectToAvoid() {
