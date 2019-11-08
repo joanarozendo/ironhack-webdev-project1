@@ -28,14 +28,23 @@ class Game {
     this.level = 1;
     this.heartImage = new Image();
     this.heartImage.src = "./style/images/heart.png";
+    
+    this.imageGirlDead = new Image();
+    this.imageGirlDead.src = "./style/images/girldead.png";
+
+    this.gameWonImage = new Image();
+    this.gameWonImage.src = "./style/images/won.jpg";
+
+    this.imageGirlParty = new Image();
+    this.imageGirlParty.src = "./style/images/girlparty.png";
+
+    this.loop;
+    this.stopGame = false;
   }
 
   startScreen() {
     this.context.fillStyle = 'black'
     this.context.fillRect(0, 0, $canvas.width, $canvas.height);
-    // const image = new Image();
-    // image.src = "./style/images/girldead.png";
-    // this.context.drawImage(image, 700, 400, image.width*3, image.height*3);
     this.context.fillStyle = 'white';
     this.context.font = '110px monogram';
     this.context.fillText('START GAME', 190, 250);
@@ -43,7 +52,6 @@ class Game {
     this.context.fillText(`Press Enter`, 430, 300);
     this.context.font = '20px monogram';
     this.context.fillText(`click for fullscreen`, 20, 480);
-    
   }
 
   paintEverything(timestamp) {
@@ -61,20 +69,44 @@ class Game {
   }
 
   animation(timestamp) {
+    this.player.update();
     if (this.life > 0 && this.score % 10 === 0 && this.score !== 0) {
       this.levelUp();
       this.paintEverything(timestamp);
     } else if (this.life > 0 && this.level < 7) {
       this.paintEverything(timestamp);
     } else if (this.level === 7) {
+      this.stopGame = true;
       this.gameWon();
+      // this.stop();
+      gameWonSound.play();
     } else if (this.life === 0) {
+      this.stopGame = true;
       this.gameOver();
+      // this.stop();
+      gameOverSound.play();
     }
-    window.requestAnimationFrame(timestamp => this.animation(timestamp));
+    this.loop =  window.requestAnimationFrame(timestamp => this.animation(timestamp));
+    this.stop();
+  }
+
+  stop() {
+    // console.log(this.stopGame);
+    if (this.stopGame === true) {
+      theme.pause();
+      theme.currentTime = 0;
+      faster.pause();
+      // console.log(theme);
+      faster.currentTime = 0;
+      window.cancelAnimationFrame(this.loop);
+    }
   }
 
   start() {
+    gameOverSound.pause();
+    gameOverSound.currentTime = 0;
+    gameWonSound.pause();
+    gameWonSound.currentTime = 0;
     this.animation();
   }
 
@@ -130,6 +162,7 @@ class Game {
       randomObjectToAvoid.paint();
       randomObjectToAvoid.movingObjectToAvoid();
       if (this.checkCollisions(randomObjectToAvoid)) {
+        //netflix.play();
         this.objectToAvoidArray.splice(i, 1);
         this.life -= 1;
         //console.log(`current lives: ${this.life}`);
@@ -150,11 +183,17 @@ class Game {
       randomCoffeeBonus.paint();
       randomCoffeeBonus.movingCoffeeBonus();
       if (this.checkCollisions(randomCoffeeBonus)) {
+        faster.play();
+        theme.pause();
         this.coffeeBonusArray.splice(i, 1);
-        let fasterPlayer = setInterval(() => (this.player.velocityX += 2), 400);
+        let fasterPlayer = setInterval(() => (this.player.velocityX += 0.5), 400);
         setTimeout(() => {
           clearInterval(fasterPlayer);
-          this.player.velocityX = 20;
+          this.player.velocityX = 7;
+          faster.pause();
+          theme.play();
+          faster.currentTime = 0;
+          theme.currentTime = 0;
         }, 5000);
         //console.log('You got faster!');
       }
@@ -198,7 +237,7 @@ class Game {
   lifeCount() {
     this.context.fillStyle = "white";
     this.context.font = "25px monogram";
-    this.context.fillText(`LIVES: ${this.life}`, 710, 50);
+    //this.context.fillText(`LIVES: ${this.life}`, 710, 50);
   
     if (this.life === 5) {
       this.context.drawImage(this.heartImage, 665, 10, this.heartImage.width * 0.05, this.heartImage.height * 0.05);
@@ -234,32 +273,27 @@ class Game {
     this.context.font = "25px monogram";
     this.context.fillText(`SCORE: ${this.score}`, 15, 60);
   }
-
+  
   gameOver() {
-    const image = new Image();
-    image.src = "./style/images/girldead.png";
     this.context.fillStyle = "black";
     this.context.fillRect(0, 0, this.width, this.height);
-    this.context.drawImage(image, 550, 140, image.width * 1.3, image.height * 1.3);
+    this.context.drawImage(this.imageGirlDead, 550, 140, this.imageGirlDead.width * 1.4, this.imageGirlDead.height * 1.4);
     this.context.fillStyle = "white";
     this.context.font = "100px monogram";
-    this.context.fillText("GAME OVER", 150, 240);
+    this.context.fillText("GAME OVER", 150, 235);
     this.context.font = "50px monogram";
-    this.context.fillText(`Score: ${this.score}`, 150, 290);
+    this.context.fillText(`Score: ${this.score}`, 150, 285);
     this.context.font = "40px monogram";
-    this.context.fillText("Try again?", 150, 340);
+    this.context.fillText("Try again?", 150, 335);
+    //gamewon.play();
     
   }
 
   gameWon() {
-    const gameWonImage = new Image();
-    gameWonImage.src = "./style/images/won.jpg";
-    this.context.drawImage(gameWonImage, 0, 0, this.width, this.height);
-    const image = new Image();
-    image.src = "./style/images/girlparty.png";
+    this.context.drawImage(this.gameWonImage, 0, 0, this.gameWonImage.width, this.gameWonImage.height);
     // this.context.fillStyle = "black";
     // this.context.fillRect(0, 0, this.width, this.height);
-    this.context.drawImage(image, 550, 150, image.width * 1.3, image.height * 1.3);
+    this.context.drawImage(this.imageGirlParty, 550, 150, this.imageGirlParty.width * 1.3, this.imageGirlParty.height * 1.3);
     this.context.fillStyle = "white";
     this.context.font = "70px monogram";
     this.context.fillText("YOU MADE IT!", 100, 220);

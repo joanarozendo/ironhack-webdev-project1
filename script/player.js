@@ -4,7 +4,9 @@ class Player {
     this.context = game.context;
     this.x = 20;
     this.y = 305;
-    this.velocityX = 20;
+    // this.velocityX = 20;
+    this.velocityX = 7;
+    this.direction = null;
 
     this.image = new Image();
     this.image.src = "./style/images/girl1.png";
@@ -30,6 +32,21 @@ class Player {
     this.panicImage.src = "./style/images/girl5.png";
     this.panicImageWidth = this.panicImage.width * 1.1;
     this.panicImageHeight = this.panicImage.height * 1.1;
+  }
+
+  update () {
+    const direction = this.direction;
+    if (this.direction) {
+      const directionMultiplier = direction === 'right' ? 1 : -1;
+      const newX = this.x + this.velocityX * directionMultiplier
+      this.x = Math.min(Math.max(20, newX), 695);
+
+      if ((this.x) >= 20) {
+      } else {
+        this.x = this.x;
+      }
+    }
+
   }
 
   paint() {

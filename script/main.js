@@ -8,11 +8,16 @@ window.addEventListener('load', () => {
 document.addEventListener('keydown', () => {
   if (event.keyCode === 13) {
     const game = new Game ($canvas);
-    game.start();
+    /* gameOverSound.pause();
+    gameOverSound.currentTime = 0;
+    gameWonSound.pause();
+    gameWonSound.currentTime = 0; */
+    theme.play();
+    game.start();    
   }
 });
 
-/* function fullscreen(){
+function fullscreen(){
   var fs = document.querySelector('canvas');
   if (fs.webkitRequestFullScreen) {
     fs.webkitRequestFullScreen();
@@ -21,11 +26,4 @@ document.addEventListener('keydown', () => {
   }
   canvas.addEventListener("click", fullscreen);
 }
-fullscreen(); */
-
-
-/* 
-const $score = document.querySelector('h1');
-$score.innerHTML = "CLASSROOM MADNESS"
-console.dir($score);
-*/
+fullscreen();
