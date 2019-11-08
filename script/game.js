@@ -28,18 +28,21 @@ class Game {
     this.level = 1;
     this.heartImage = new Image();
     this.heartImage.src = "./style/images/heart.png";
-    // this.heartImageHeight = this.heartImage.height * 0.05;
-    // this.heartImageWidth = this.heartImage.width * 0.05;
   }
 
   startScreen() {
     this.context.fillStyle = 'black'
-    this.context.fillRect(0, 0, $canvas.width, $canvas.height)
+    this.context.fillRect(0, 0, $canvas.width, $canvas.height);
+    // const image = new Image();
+    // image.src = "./style/images/girldead.png";
+    // this.context.drawImage(image, 700, 400, image.width*3, image.height*3);
     this.context.fillStyle = 'white';
-    this.context.font = '60px monogram';
-    this.context.fillText('START GAME', 240, 250);
-    this.context.font = '25px monogram';
-    this.context.fillText(`Press 'Enter' to start`, 275, 300);
+    this.context.font = '110px monogram';
+    this.context.fillText('START GAME', 190, 250);
+    this.context.font = '40px monogram';
+    this.context.fillText(`Press Enter`, 430, 300);
+    this.context.font = '20px monogram';
+    this.context.fillText(`click for fullscreen`, 20, 480);
     
   }
 
@@ -233,25 +236,34 @@ class Game {
   }
 
   gameOver() {
-    this.clear();
+    const image = new Image();
+    image.src = "./style/images/girldead.png";
     this.context.fillStyle = "black";
     this.context.fillRect(0, 0, this.width, this.height);
+    this.context.drawImage(image, 550, 140, image.width * 1.3, image.height * 1.3);
     this.context.fillStyle = "white";
-    this.context.font = "80px monogram";
-    this.context.fillText("GAME OVER", 200, 250);
+    this.context.font = "100px monogram";
+    this.context.fillText("GAME OVER", 150, 240);
+    this.context.font = "50px monogram";
+    this.context.fillText(`Score: ${this.score}`, 150, 290);
     this.context.font = "40px monogram";
-    this.context.fillText(`Your score: ${this.score}`, 200, 300);
+    this.context.fillText("Try again?", 150, 340);
+    
   }
 
   gameWon() {
-    this.clear();
     const gameWonImage = new Image();
-    gameWonImage.src = "./style/images/dayover.jpg";
+    gameWonImage.src = "./style/images/won.jpg";
     this.context.drawImage(gameWonImage, 0, 0, this.width, this.height);
+    const image = new Image();
+    image.src = "./style/images/girlparty.png";
+    // this.context.fillStyle = "black";
+    // this.context.fillRect(0, 0, this.width, this.height);
+    this.context.drawImage(image, 550, 150, image.width * 1.3, image.height * 1.3);
     this.context.fillStyle = "white";
-    this.context.font = "80px monogram";
-    this.context.fillText("YOU WON!", 200, 250);
-    this.context.font = "40px monogram";
-    this.context.fillText(`Your score: ${this.score}`, 200, 300);
+    this.context.font = "70px monogram";
+    this.context.fillText("YOU MADE IT!", 100, 220);
+    this.context.font = "50px monogram";
+    this.context.fillText(`Score: ${this.score}`, 100, 270);
   }
 }

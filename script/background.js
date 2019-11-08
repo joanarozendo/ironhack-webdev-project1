@@ -12,7 +12,7 @@ class Background {
     this.levelThreeImage = new Image();
     this.levelThreeImage.src = "./style/images/background3.jpg";
     this.levelFourImage = new Image();
-    this.levelFourImage.src = "./style/images/background4.png";
+    this.levelFourImage.src = "./style/images/background4.jpg";
     this.levelFiveImage = new Image();
     this.levelFiveImage.src = "./style/images/background5.jpg";
     this.levelSixImage = new Image();

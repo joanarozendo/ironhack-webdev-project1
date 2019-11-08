@@ -1,49 +1,68 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700&display=swap');
 @font-face { font-family: monogram; src: url("./monogram_extended.ttf")}
 
-body, h1 {
+body {
   box-sizing: border-box;
-  /* font-family: 'Ubuntu Mono', monospace; */
   font-family: monogram;
   font-size: 24px;
-  /* color: #383434; */
-  background-color: darkslategray;
+  color: black;
+  background-color: rgb(189, 149, 88);
+  margin: 0 20px;
 }
 
-nav .ironhack-logo {
-  width: 70px;
+/* nav .ironhack-logo {
+  width: 40px;
 }
 
 nav .music-icon {
   width: 30px;
-}
+} */
 
 h1 {
   text-align: center;
   text-transform: uppercase;
+  font-size: 100px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 }
+
+p, li {
+  font-family: 'Ubuntu Mono', monospace;
+}
+
+li {
+  list-style-type: square ;
+  margin-left: 20px;
+}
+
+hr {
+  background-color: black;
+}
+
 h3 {
-  text-decoration: underline;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 canvas {
   margin-top: 30px;
-  /* margin-left: 200px; */
+  margin-left: 210px;
   border: 1px solid #383434;
 }
-/* 
-.button {
-  margin-left: 250px;
-  margin-top: 30px;
-} */
 
-#instructions {
-  text-align: center;
+.footer {
+  margin: 20px 20px 0;
+  text-align: right;
 }
 
-footer {
-  margin-right: 20px;
-  text-align: right;
+.footer p {
+  font-family: monogram;
+}
+
+img {
+  width: 50px;
+}
+
+.player-img {
+  width: 100px;
 }
