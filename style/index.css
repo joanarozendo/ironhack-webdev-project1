@@ -4,19 +4,10 @@
 body {
   box-sizing: border-box;
   font-family: monogram;
-  font-size: 24px;
   color: black;
   background-color: rgb(189, 149, 88);
   margin: 0 20px;
 }
-
-/* nav .ironhack-logo {
-  width: 40px;
-}
-
-nav .music-icon {
-  width: 30px;
-} */
 
 h1 {
   text-align: center;
@@ -28,6 +19,7 @@ h1 {
 
 p, li {
   font-family: 'Ubuntu Mono', monospace;
+  font-size: 20px;
 }
 
 li {
@@ -37,11 +29,16 @@ li {
 
 hr {
   background-color: black;
+  height:  0.5px;
 }
 
 h3 {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
+}
+
+.intro {
+  margin-top: 20px;
 }
 
 canvas {
@@ -53,21 +50,74 @@ canvas {
 .footer {
   margin: 20px 0;
   text-align: right;
-  display: inline;
 }
 
 .footer p {
   font-family: monogram;
+  font-size: 25px;
 }
 
 img {
-  width: 50px;
-}
-
-.footer img {
-  width: 20px;
+  width: 40px;
 }
 
 .player-img {
-  width: 100px;
+  width: 90px;
+}
+
+.div-body {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.center-arrows {
+  margin: 35px 20px;
+}
+
+.center-catch-img {
+  margin: 50px 10px;
+}
+
+.center-catch-img img {
+  margin-left: 15px;
+}
+
+.center-avoid-img {
+  margin: 40px 0;
+}
+
+.center-avoid-img img {
+  margin-left: 10px;
+}
+
+.bonus {
+  margin-left: 10px;
+  line-height: 40px;
+  text-align: justify;
+}
+
+.bonus h3 {
+  margin-left: 15px;
+}
+
+.bonus .coffee {
+  width: 30px;
+  margin-left: 155px;
+}
+
+.bonus .cookie {
+  width: 30px;
+  margin-left: 122px;
+}
+
+.bonus .beer {
+  margin-left: 8px;
 }
